@@ -1,0 +1,21 @@
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,16,2);
+
+void setup() {
+  lcd.init();
+  lcd.clear();
+  lcd.backlight();
+}
+
+void loop() {
+  lcd.setCursor(0,0);
+  lcd.print("Welcome         ");
+  lcd.setCursor(0,1);
+  lcd.print("Humaira Tasnim  ");
+  delay(3000);
+  lcd.setCursor(0,0);
+  lcd.print("  Robotics Camp ");
+  lcd.setCursor(0,1);
+  lcd.print("       2023     ");
+  delay(3000);
+}
