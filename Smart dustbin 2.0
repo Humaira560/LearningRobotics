@@ -1,0 +1,41 @@
+#include<Servo.h>
+
+int distance_Function(int echo, int trig);
+Servo myservo;
+int echo=5, trig=4;
+
+void setup()
+{
+  myservo.attach(8);
+  pinMode(echo,INPUT);
+  pinMode(trig,OUTPUT);
+}
+
+void loop()
+{
+  if(distance_Function(echo,trig)<30)
+  {
+  myservo.write(90);
+    delay(2000);
+  }
+  if(distance_Function(echo,trig)>30 && distance_Function(echo,trig)<30)
+  {
+  myservo.write(0);
+  }
+}
+
+int distance_Function(int echo, int trig)
+{
+  
+digitalWrite(trig,0);
+  delay(2);
+  
+  digitalWrite(trig,1);
+  delay(10);
+  digitalWrite(trig,0);
+  
+  int duration=pulseIn(echo,1);
+  
+  int distance=(0.034*duration)/2;
+  return distance;
+}
