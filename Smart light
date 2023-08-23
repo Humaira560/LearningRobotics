@@ -1,0 +1,16 @@
+int relay=8;
+int pir=7;
+void setup()
+{
+pinMode(relay,OUTPUT);
+pinMode(pir,INPUT);
+}
+void loop()
+{
+if(digitalRead(pir)==HIGH){
+digitalWrite(relay,HIGH);
+}
+else{
+digitalWrite(relay,LOW);
+}
+}
