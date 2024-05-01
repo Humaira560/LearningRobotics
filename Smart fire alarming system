@@ -1,0 +1,32 @@
+int gas_sensor=A0, flame_sensor=7, buzzer=5;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(buzzer,OUTPUT);
+  pinMode(flame,INTPUT);
+}
+
+void loop()
+{
+  if(!digital(flame_sensor))
+  {
+    Serial.print("Fire Detected");
+    digitalWrite(buzzer,HIGH);
+  }
+ else
+ {
+   Serial.print("No Fire Detected");
+   digitalWrite(buzzer,LOW);
+ }
+ if(analogRead(A0)>230)
+ {
+  Serial.print(" Smoke Detected");
+  digitalWrite(buzzer,HIGH);
+ }
+else
+{
+Serial.print(" Smoke Not Detected");
+digitalWrite(buzzer,LOW);
+}
+Serial.println("");
+}
