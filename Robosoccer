@@ -1,0 +1,141 @@
+// right motor_ right pin 11, left pin 12, Rpwm 5, Lpwm 6
+// left motor_ right pin 7, left pin 8, Rpwm 9, Lpwm 10
+
+int speeds=50;
+char deta;
+
+#define rm_rpin 11
+#define rm_lpin 12
+#define rm_rpwm 5
+#define rm_lpwm 6
+
+#define lm_rpin 7
+#define lm_lpin 8
+#define lm_rpwm 9
+#define lm_lpwm 10
+
+void forward();
+void backward();
+void turn_right();
+void turn_left();
+void stop();
+
+void setup()
+{
+ pinMode(rm_rpin,OUTPUT);
+ pinMode(rm_lpin,OUTOUT);
+ pinMode(rm_rpwm,OUTPUT);
+ pinMode(rm_lpwm,OUTOUT);
+ 
+ pinMode(lm_rpin,OUTPUT);
+ pinMode(lm_lpin,OUTOUT);
+ pinMode(lm_rpwm,OUTPUT);
+ pinMode(lm_lpwm,OUTOUT);
+ 
+  Serial.begin(9600);
+}
+
+void loop()
+{
+/* forward();delay(2000);
+ stop();delay(2000);
+ backward();delay(2000);
+ stop();delay(2000);
+ turn_right();delay(3000);
+ stop();delay(2000);
+ turn_left();delay(3000);
+ stop();delay(2000);*/
+  if(Serial.available()){
+  data=Serial.read();
+ // Serial.println(deta);
+    if(deta>='0' && deta<='10'){
+    int value=(int)deta;
+     speeds=value*28 // 255/9=28, 0*28=0, 9*28=252,
+    }
+  
+    if(deta=='F'){
+     forward();
+     Serial.println('F');
+    }
+     if(deta=='B'){
+     backward();
+     Serial.println('B');
+    }
+     if(deta=='R'){
+     turn_right();
+     Serial.println('R');
+    }
+     if(deta=='L'){
+     turn_left();
+     Serial.println('L');
+    }
+     if(deta=='S'){
+     stop();
+     Serial.println('S');
+    }
+  
+  }
+}
+
+void forward()
+{
+ digitalWrite(rm_rpin,HIGH);
+ digitalWrite(rm_lpin,HIGH);
+ analogWrite(rm_rpwm,speeds);
+ analogWrite(rm_lpwm,0);
+ 
+ digitalWrite(lm_rpin,HIGH);
+ digitalWrite(lm_lpin,HIGH);
+ analogWrite(lm_rpwm,speeds);
+ analogWrite(lm_lpwm,0);
+}
+
+void backward()
+{
+ digitalWrite(rm_rpin,HIGH);
+ digitalWrite(rm_lpin,HIGH);
+ analogWrite(rm_rpwm,0);
+ analogWrite(rm_lpwm,speeds);
+ 
+ digitalWrite(lm_rpin,HIGH);
+ digitalWrite(lm_lpin,HIGH);
+ analogWrite(lm_rpwm,0);
+ analogWrite(lm_lpwm,speeds);
+}
+
+void turn_right()
+{
+ digitalWrite(rm_rpin,HIGH);
+ digitalWrite(rm_lpin,HIGH);
+ analogWrite(rm_rpwm,0);
+ analogWrite(rm_lpwm,speeds);
+ 
+ digitalWrite(lm_rpin,HIGH);
+ digitalWrite(lm_lpin,HIGH);
+ analogWrite(lm_rpwm,speeds);
+ analogWrite(lm_lpwm,0);
+}
+
+void turn_left()
+{
+ digitalWrite(rm_rpin,HIGH);
+ digitalWrite(rm_lpin,HIGH);
+ analogWrite(rm_rpwm,speeds);
+ analogWrite(rm_lpwm,0);
+ 
+ digitalWrite(lm_rpin,HIGH);
+ digitalWrite(lm_lpin,HIGH);
+ analogWrite(lm_rpwm,0);
+ analogWrite(lm_lpwm,speeds);
+}
+
+void stop()
+{
+ digitalWrite(rm_rpin,LOW);
+ digitalWrite(rm_lpin,LOW);
+ 
+ digitalWrite(lm_rpin,LOW);
+ digitalWrite(lm_lpin,LOW);
+ 
+}
+
